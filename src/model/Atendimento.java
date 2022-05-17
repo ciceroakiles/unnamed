@@ -5,6 +5,8 @@ import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -25,6 +27,11 @@ public class Atendimento {
 	@NotNull
 	private LocalTime hrAtend;
 	
+	@ManyToOne(targetEntity = Cliente.class)
+	@JoinColumn(name = "cpf")
+	@NotNull
+	private Cliente cliente;
+	
 	public int getIdAtend() {
 		return idAtend;
 	}
@@ -42,5 +49,11 @@ public class Atendimento {
 	}
 	public void setHrAtend(LocalTime hrAtend) {
 		this.hrAtend = hrAtend;
+	}
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 }

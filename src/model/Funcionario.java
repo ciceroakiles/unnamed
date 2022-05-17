@@ -8,6 +8,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -38,6 +40,11 @@ public class Funcionario {
 	@NotNull
 	private String telefone;
 	
+	@ManyToOne(targetEntity = Atendimento.class)
+	@JoinColumn(name = "idAtend")
+	@NotNull
+	private Atendimento atend;
+	
 	public int getId() {
 		return id;
 	}
@@ -67,5 +74,11 @@ public class Funcionario {
 	}
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+	public Atendimento getAtend() {
+		return atend;
+	}
+	public void setAtend(Atendimento atend) {
+		this.atend = atend;
 	}
 }
