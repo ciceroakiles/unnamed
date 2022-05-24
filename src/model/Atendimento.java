@@ -27,10 +27,10 @@ public class Atendimento {
 	@NotNull
 	private LocalTime hrAtend;
 	
-	@ManyToOne(targetEntity = Cliente.class)
-	@JoinColumn(name = "cpf")
+	@ManyToOne(targetEntity = Atendente.class)
+	@JoinColumn(name = "id")
 	@NotNull
-	private Cliente cliente;
+	private Atendente atendente;
 	
 	public int getIdAtend() {
 		return idAtend;
@@ -50,10 +50,10 @@ public class Atendimento {
 	public void setHrAtend(LocalTime hrAtend) {
 		this.hrAtend = hrAtend;
 	}
-	public Cliente getCliente() {
-		return cliente;
+	public Atendente getAtendente() {
+		return atendente;
 	}
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setAtendente(Atendente atendente) {
+		this.atendente = atendente;
 	}
 }
