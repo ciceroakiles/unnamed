@@ -1,15 +1,11 @@
 package model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -20,30 +16,24 @@ public class Funcionario {
 
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NotNull
 	private int id;
-	
-	@Column(name = "nome", length = 200)
+
+	@Column(name = "nome", length = 100)
 	@NotNull
 	private String nome;
 	
-	@Column(name = "dtNasc")
+	@Column(name = "data_nascimento")
 	@NotNull
-	private Date dtNasc;
-	
+	private LocalDate dataNascimento;
+
 	@Column(name = "salario")
 	@NotNull
 	private double salario;
 	
-	@Column(name = "telefone", length = 15)
+	@Column(name = "telefone", length = 11)
 	@NotNull
 	private String telefone;
-	
-	@ManyToOne(targetEntity = Atendimento.class)
-	@JoinColumn(name = "idAtend")
-	@NotNull
-	private Atendimento atend;
 	
 	public int getId() {
 		return id;
@@ -57,11 +47,11 @@ public class Funcionario {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Date getDtNasc() {
-		return dtNasc;
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
 	}
-	public void setDtNasc(Date dtNasc) {
-		this.dtNasc = dtNasc;
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 	public double getSalario() {
 		return salario;
@@ -74,11 +64,5 @@ public class Funcionario {
 	}
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
-	}
-	public Atendimento getAtend() {
-		return atend;
-	}
-	public void setAtend(Atendimento atend) {
-		this.atend = atend;
 	}
 }

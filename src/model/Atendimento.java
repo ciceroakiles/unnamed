@@ -1,7 +1,6 @@
 package model;
 
-import java.time.LocalTime;
-import java.util.Date;
+import java.time.LocalDateTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -13,47 +12,40 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name = "atendimento")
 public class Atendimento {
-
+	
 	@Id
-	@Column(name = "idAtend")
+	@ManyToOne
+	@JoinColumn(name = "cpf")
 	@NotNull
-	private int idAtend;
+	private Cliente cliente;
 	
-	@Column(name = "dtAtend")
-	@NotNull
-	private Date dtAtend;
-	
-	@Column(name = "hrAtend")
-	@NotNull
-	private LocalTime hrAtend;
-	
-	@ManyToOne(targetEntity = Atendente.class)
+	@Id
+	@ManyToOne
 	@JoinColumn(name = "id")
 	@NotNull
 	private Atendente atendente;
 	
-	public int getIdAtend() {
-		return idAtend;
+	@Id
+	@Column(name = "data_hora_atendimento")
+	@NotNull
+	private LocalDateTime dataHora;
+	
+	public Cliente getCliente() {
+		return cliente;
 	}
-	public void setIdAtend(int idAtend) {
-		this.idAtend = idAtend;
-	}
-	public Date getDtAtend() {
-		return dtAtend;
-	}
-	public void setDtAtend(Date dtAtend) {
-		this.dtAtend = dtAtend;
-	}
-	public LocalTime getHrAtend() {
-		return hrAtend;
-	}
-	public void setHrAtend(LocalTime hrAtend) {
-		this.hrAtend = hrAtend;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	public Atendente getAtendente() {
 		return atendente;
 	}
 	public void setAtendente(Atendente atendente) {
 		this.atendente = atendente;
+	}
+	public LocalDateTime getDataHora() {
+		return dataHora;
+	}
+	public void setDataHora(LocalDateTime dataHora) {
+		this.dataHora = dataHora;
 	}
 }

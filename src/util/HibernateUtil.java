@@ -12,7 +12,6 @@ import model.Cliente;
 import model.Entregador;
 import model.Funcionario;
 
-
 public class HibernateUtil {
 	private static SessionFactory sessionFactory;
 
@@ -23,7 +22,7 @@ public class HibernateUtil {
 				
 				Properties settings = new Properties();
 				settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-				settings.put(Environment.URL, "jdbc:mysql://localhost:3306/clinicadb?createDatabaseIfNotExist=true");
+				settings.put(Environment.URL, "jdbc:mysql://localhost:3306/empresadb?createDatabaseIfNotExist=true");
 				settings.put(Environment.USER, "root");
 				settings.put(Environment.PASS, "alunofatec");
 				settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");

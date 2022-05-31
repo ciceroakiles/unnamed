@@ -1,6 +1,5 @@
 package model;
 
-import java.time.LocalTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -9,30 +8,30 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name = "func_atendente")
 public class Atendente extends Funcionario {
+	
+	@Column(name = "hora_entrada")
+	@NotNull
+	private int horaEntrada;
 
-	@Column(name = "hrEntrada")
+	@Column(name = "hora_saida")
 	@NotNull
-	private LocalTime hrEntrada;
-	
-	@Column(name = "hrSaida")
-	@NotNull
-	private LocalTime hrSaida;
-	
-	@Column(name = "email", length = 50)
+	private int horaSaida;
+
+	@Column(name = "email", length = 40)
 	@NotNull
 	private String email;
 	
-	public LocalTime getHrEntrada() {
-		return hrEntrada;
+	public int getHoraEntrada() {
+		return horaEntrada;
 	}
-	public void setHrEntrada(LocalTime hrEntrada) {
-		this.hrEntrada = hrEntrada;
+	public void setHoraEntrada(int horaEntrada) {
+		this.horaEntrada = horaEntrada;
 	}
-	public LocalTime getHrSaida() {
-		return hrSaida;
+	public int getHoraSaida() {
+		return horaSaida;
 	}
-	public void setHrSaida(LocalTime hrSaida) {
-		this.hrSaida = hrSaida;
+	public void setHoraSaida(int horaSaida) {
+		this.horaSaida = horaSaida;
 	}
 	public String getEmail() {
 		return email;
