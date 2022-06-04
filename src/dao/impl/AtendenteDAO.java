@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import dao._IObjetoDAO;
+
+import dao.iface.IObjetoDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import model.Atendente;
 
-public class AtendenteDAO implements _IObjetoDAO<Atendente> {
+public class AtendenteDAO implements IObjetoDAO<Atendente> {
 
 	public SessionFactory sf;
 	

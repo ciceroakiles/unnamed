@@ -1,8 +1,8 @@
-package dao;
+package dao.iface;
 
 import java.util.List;
 
-public interface _IObjetoDAO<T> {
+public interface IObjetoDAO<T> {
 
 	public void inserir(T obj);
 	public void alterar(T obj);
