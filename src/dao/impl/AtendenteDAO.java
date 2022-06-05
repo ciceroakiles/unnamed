@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-
 import dao.iface.IObjetoDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -49,6 +48,12 @@ public class AtendenteDAO implements IObjetoDAO<Atendente> {
 	public Atendente buscar(Atendente obj) {
 		EntityManager em = sf.createEntityManager();
 		Atendente a = em.find(Atendente.class, obj.getId());
+		return a;
+	}
+
+	public Atendente buscaPorId(int id) {
+		EntityManager em = sf.createEntityManager();
+		Atendente a = em.find(Atendente.class, id);
 		return a;
 	}
 

@@ -16,9 +16,9 @@ import util.HibernateUtil;
 public class Principal {
 
 	private static SessionFactory sf = HibernateUtil.getSessionFactory();
-	private static AtendenteDAO aDao = new AtendenteDAO(sf);
-	private static ClienteDAO cDao = new ClienteDAO(sf);
-	private static AtendimentoDAO atDAO = new AtendimentoDAO(sf);
+	public static AtendenteDAO aDao = new AtendenteDAO(sf);
+	public static ClienteDAO cDao = new ClienteDAO(sf);
+	public static AtendimentoDAO atDAO = new AtendimentoDAO(sf);
 	
 	private static Atendente a4;
 	private static Cliente c4;
@@ -82,12 +82,14 @@ public class Principal {
 	
 	private static void operacoesAtendimento() {
 		/*
+		 * selectOne
+		 */
 		Atendimento at1 = new Atendimento();
 		// Dados
-		at1.setAtendente(a4);
-		at1.setCliente(c4);
-		at1.setDataHora(LocalDateTime.now());
-		at1.setChave(new AtendimentoPKey(c4.getNome(), a4.getNome(), at1.getDataHora().toString()));
+		at1.setChave();
+		at1.getChave().setAtendente(a4);
+		at1.getChave().setCliente(c4);
+		at1.getChave().setDataHora(LocalDateTime.now());
 		// (create)
 		atDAO.insere(at1);
 		// (delete)
@@ -95,10 +97,13 @@ public class Principal {
 		// (read - select one)
 		atDAO.insere(at1);
 		Atendimento at2 = atDAO.selectOne(at1);
-		at2.setDataHora(at1.getDataHora());
-		System.out.println(at2.getChave().toString());
-		 */
+		at2.getChave().setDataHora(at1.getChave().getDataHora());
+		// Resultado
+		//System.out.println(at2.toString());
 		
+		/*
+		 * selectOneCliente
+		 */
 		Cliente c = new Cliente();
 		c.setCpf("22233344455");
 		c.setNome("Zelia Santos");
@@ -106,21 +111,52 @@ public class Principal {
 		c.setEmail("email3@customer.com");
 		c.setPronome("Sra.");
 		cDao.inserir(c);
-		
-		Atendimento at1 = new Atendimento();
+		Atendimento at3 = new Atendimento();
 		// Loop com alguns atendimentos (dois clientes)
 		for (int i = 0; i < 10; i++) {
-			at1.setChave();
-			at1.getChave().setAtendente(a4);
-			at1.getChave().setDataHora(LocalDateTime.now());
-			if (i % 2 == 0) {
-				at1.getChave().setCliente(c4);
-			} else {
-				at1.getChave().setCliente(c);
-			}
-			atDAO.insere(at1);
+			at3.setChave();
+			at3.getChave().setAtendente(a4);
+			at3.getChave().setDataHora(LocalDateTime.now());
+			at3.getChave().setCliente( (i % 2 == 0) ? c4 : c );
+			atDAO.insere(at3);
 		}
-		List<Atendimento> lista1 = atDAO.selectOneCliente(at1);
-		lista1.forEach(atendimento -> System.out.println(atendimento));
+		List<Atendimento> lista1 = atDAO.selectOneCliente(at3);
+		// Resultado
+		//lista1.forEach(atendimento -> System.out.println(atendimento.toString()));
+		
+		/*
+		 * selectOneAtendente
+		 */
+		Atendente a = new Atendente();
+		a.setId(2);
+		a.setNome("Pedro Silva");
+		a.setEmail("email4@example.org");
+		a.setDataNascimento(LocalDate.of(1984, 01, 03));
+		a.setTelefone("1199467581");
+		a.setSalario(2100.0);
+		a.setHoraEntrada(7);
+		a.setHoraSaida(19);
+		aDao.inserir(a);
+		Atendimento at4 = new Atendimento();
+		// Loop com alguns atendimentos (dois atendentes)
+		for (int i = 0; i < 10; i++) {
+			at4.setChave();
+			//at2.getChave().setAtendente( (i % 2 == 0) ? a4 : a );
+			at4.getChave().setAtendente(a);
+			at4.getChave().setDataHora(LocalDateTime.now());
+			//at2.getChave().setCliente(c4);
+			at4.getChave().setCliente( (i % 2 == 0) ? c4 : c );
+			atDAO.insere(at4);
+		}
+		List<Atendimento> lista2 = atDAO.selectOneAtendente(at4);
+		// Resultado
+		//lista2.forEach(atendimento -> System.out.println(atendimento.toString()));
+		
+		/*
+		 * selectAll
+		 */
+		List<Atendimento> lista3 = atDAO.selectAll();
+		// Resultado
+		//lista3.forEach(atendimento -> System.out.println(atendimento.toString()));
 	}
 }

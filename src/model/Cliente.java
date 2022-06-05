@@ -61,4 +61,13 @@ public class Cliente {
 	public void setPronome(String pronome) {
 		this.pronome = pronome;
 	}
+	
+	@Override
+	public String toString() {
+		return "Cliente [cpf=" + cpf +
+			", nome=" + nome +
+			", telefone=" + telefone +
+			", email=" + email +
+			", pronome=" + pronome + "]";
+	}
 }

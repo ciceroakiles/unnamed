@@ -17,4 +17,11 @@ public class Atendimento {
 	public void setChave() {
 		this.chave = new AtendimentoPKey();
 	}
+	
+	@Override
+	public String toString() {
+		return "Atendimento [cliente=" + getChave().getCliente() +
+			", atendente=" + getChave().getAtendente() +
+			", dataHora=" + getChave().getDataHora().toString() + "]";
+	}
 }

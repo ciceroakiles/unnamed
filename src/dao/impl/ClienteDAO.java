@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-
 import dao.iface.IObjetoDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -19,36 +18,42 @@ public class ClienteDAO implements IObjetoDAO<Cliente> {
 	}
 
 	@Override
-	public void inserir(Cliente cli) {
+	public void inserir(Cliente obj) {
 		EntityManager entityManager = sf.createEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
-		entityManager.persist(cli);
+		entityManager.persist(obj);
 		transaction.commit();
 	}
 
 	@Override
-	public void alterar(Cliente cli) {
+	public void alterar(Cliente obj) {
 		EntityManager entityManager = sf.createEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
-		entityManager.merge(cli);
+		entityManager.merge(obj);
 		transaction.commit();
 	}
 
 	@Override
-	public void remover(Cliente cli) {
+	public void remover(Cliente obj) {
 		EntityManager entityManager = sf.createEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
-		entityManager.remove(cli);
+		entityManager.remove(obj);
 		transaction.commit();
 	}
 
 	@Override
-	public Cliente buscar(Cliente cli) {
+	public Cliente buscar(Cliente obj) {
 		EntityManager entityManager = sf.createEntityManager();
-		cli = entityManager.find(Cliente.class, cli.getCpf());
+		Cliente cli = entityManager.find(Cliente.class, obj.getCpf());
+		return cli;
+	}
+	
+	public Cliente buscaPorId(String id) {
+		EntityManager entityManager = sf.createEntityManager();
+		Cliente cli = entityManager.find(Cliente.class, id);
 		return cli;
 	}
 

@@ -39,4 +39,11 @@ public class Atendente extends Funcionario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	@Override
+	public String toString() {
+		return "Atendente [horaEntrada=" + horaEntrada +
+			", horaSaida=" + horaSaida +
+			", email=" + email + "]";
+	}
 }
